@@ -2,17 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.inventory">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
+        android:name=".model.InventoryApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
-        <activity android:name=".Login">
+            android:name=".main.Dashboard"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".main.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -9,10 +9,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:layout_gravity="center"
     android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="#fff"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".Login">
+    tools:context=".main.Login">
 
     <ProgressBar
         android:id="@+id/login_progress"
@@ -22,13 +23,13 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-
     <LinearLayout
         android:id="@+id/phone_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:focusable="true"
+        android:background="@drawable/select_button"
         android:gravity="center"
         android:layout_margin="20dp"
         android:focusableInTouchMode="true"
@@ -45,6 +46,7 @@
             android:textColorHint="@color/colorPrimary"
             android:inputType="text"
             android:focusable="true"
+            android:paddingLeft="8sp"
             android:layout_margin="10dp"
             android:textColor="@color/colorPrimary"
             android:focusableInTouchMode="true"
@@ -62,6 +64,7 @@
             android:textColor="@color/colorPrimary"
             android:focusable="true"
             android:layout_margin="10dp"
+            android:paddingLeft="8sp"
             android:focusableInTouchMode="true"
             android:imeActionLabel="@string/action_sign_in_short"
             android:imeOptions="actionUnspecified"

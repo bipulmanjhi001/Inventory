@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20sp"
+        android:background="#fff"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10sp"
+                android:gravity="center"
+                android:text="Date"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/from_date"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/select_button"
+                android:drawableRight="@drawable/ic_calendar"
+                android:gravity="center"
+                android:inputType="date"
+                android:paddingRight="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:gravity="center"
+                android:inputType="date"
+                android:text="To"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/to_date"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/select_button"
+                android:drawableRight="@drawable/ic_calendar"
+                android:gravity="center"
+                android:paddingRight="10sp" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/follow_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none" />
+
+    </LinearLayout>
+</LinearLayout>

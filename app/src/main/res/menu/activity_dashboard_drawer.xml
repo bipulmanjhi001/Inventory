@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_pencil"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_user"
+            android:title="@string/menu_gallery" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_magnifier"
+            android:title="@string/menu_slideshow" />
+        <item
+            android:id="@+id/nav_tools"
+            android:icon="@drawable/ic_order"
+            android:title="@string/menu_tools" />
+        <item
+            android:id="@+id/nav_deliver"
+            android:icon="@drawable/ic_delivery_truck"
+            android:title="Order Deliver" />
+        <item
+            android:id="@+id/nav_receive"
+            android:icon="@drawable/ic_give_money"
+            android:title="Payment Receive" />
+
+    </group>
+
+</menu>
