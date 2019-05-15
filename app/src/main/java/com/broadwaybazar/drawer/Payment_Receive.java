@@ -1,4 +1,5 @@
-package com.inventory.drawer;
+package com.broadwaybazar.drawer;
+
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inventory.R;
+import com.broadwaybazar.R;
 
-public class Order extends Fragment {
+public class Payment_Receive extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -19,11 +20,12 @@ public class Order extends Fragment {
     private String mParam2;
     private OnFragmentInteractionListener mListener;
 
-    public Order() {
+    public Payment_Receive() {
+
     }
 
-    public static Order newInstance(String param1, String param2) {
-        Order fragment = new Order();
+    public static Payment_Receive newInstance(String param1, String param2) {
+        Payment_Receive fragment = new Payment_Receive();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -41,9 +43,9 @@ public class Order extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.order_form, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.payment_receive, container, false);
+
 
         return view;
     }

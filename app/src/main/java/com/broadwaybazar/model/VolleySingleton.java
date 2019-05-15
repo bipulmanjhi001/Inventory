@@ -1,4 +1,4 @@
-package com.inventory.model;
+package com.broadwaybazar.model;
 
 import android.content.Context;
 

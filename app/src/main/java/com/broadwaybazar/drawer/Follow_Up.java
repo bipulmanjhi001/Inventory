@@ -1,4 +1,4 @@
-package com.inventory.drawer;
+package com.broadwaybazar.drawer;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -10,8 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 
-import com.inventory.R;
+import com.broadwaybazar.R;
 
 import java.util.Calendar;
 
@@ -25,6 +26,7 @@ public class Follow_Up extends Fragment {
     private String mParam2;
     private OnFragmentInteractionListener mListener;
     private int mYear, mMonth, mDay;
+    ImageView from_date_img, to_date_img;
 
     public Follow_Up() {
     }
@@ -53,7 +55,9 @@ public class Follow_Up extends Fragment {
         View view = inflater.inflate(R.layout.follow_up_form, container, false);
 
         from_date = view.findViewById(R.id.from_date);
-        from_date.setOnClickListener(new View.OnClickListener() {
+        from_date_img = view.findViewById(R.id.from_date_img);
+
+        from_date_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();
@@ -74,7 +78,8 @@ public class Follow_Up extends Fragment {
             }
         });
         to_date = view.findViewById(R.id.to_date);
-        to_date.setOnClickListener(new View.OnClickListener() {
+        to_date_img = view.findViewById(R.id.to_date_img);
+        to_date_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Calendar c = Calendar.getInstance();

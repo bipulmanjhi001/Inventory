@@ -1,10 +1,10 @@
-package com.inventory.pref;
+package com.broadwaybazar.pref;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.inventory.main.Login;
+import com.broadwaybazar.main.Login;
 
 public class SharedPrefManager {
 
@@ -13,7 +13,6 @@ public class SharedPrefManager {
     private static final String KEY_EMAIL = "email";
     private static final String KEY_MOBILE = "mobile";
     private static final String KEY_ID = "keyid";
-
     private static SharedPrefManager mInstance;
     private static Context mCtx;
 

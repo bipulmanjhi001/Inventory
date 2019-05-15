@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fff"
     android:orientation="vertical">
 
@@ -9,97 +10,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20sp"
+        android:layout_marginBottom="10sp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/select_button"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20sp"
-            android:layout_marginRight="10dp"
+            android:layout_margin="10dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Enter Name"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Date"
                 android:textColor="@color/colorPrimary"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <CalendarView
+                android:id="@+id/calendar_issue"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/enter_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="100dp"
-                    android:layout_weight="1"
-                    android:nextFocusDown="@+id/details"
-                    android:paddingLeft="6sp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical">
+                android:dateTextAppearance="@style/CalenderViewDateCustomText"
+                android:theme="@style/CalenderViewCustom"
+                android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-
-                android:layout_width="match_parent"
+                android:id="@+id/issue_datetext"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Details"
-                android:textColor="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:hint="Select date"
+                android:nextFocusDown="@+id/customers"
                 android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textStyle="normal" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/details"
-                    android:layout_width="259dp"
-                    android:layout_height="70dp"
-                    android:layout_marginRight="100dp"
-                    android:layout_weight="1"
-                    android:lines="5"
-                    android:nextFocusDown="@+id/customer"
-                    android:paddingLeft="6sp"
-                    android:singleLine="false"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -127,13 +83,13 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/customer"
+                    android:id="@+id/customers"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:nextFocusDown="@+id/company"
+                    android:nextFocusDown="@+id/mobile"
                     android:paddingLeft="6sp"
                     android:singleLine="true"
                     android:textColor="@color/black"
@@ -150,7 +106,235 @@
                     android:textSize="12sp" />
 
             </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10sp"
+            android:layout_marginRight="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mobile"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/mobile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="100dp"
+                    android:layout_weight="1"
+                    android:nextFocusDown="@+id/gstin"
+                    android:paddingLeft="6sp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10sp"
+            android:layout_marginRight="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GSTIN"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/gstin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="100dp"
+                    android:layout_weight="1"
+                    android:nextFocusDown="@+id/area"
+                    android:paddingLeft="6sp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10sp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reference"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/reference"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="100dp"
+                    android:layout_weight="1"
+                    android:nextFocusDown="@+id/details"
+                    android:paddingLeft="6sp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/area"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    android:nextFocusDown="@+id/address"
+                    android:paddingLeft="6sp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/select_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/select_button"
+                    android:padding="4sp"
+                    android:singleLine="true"
+                    android:text="State"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10sp"
+            android:layout_marginRight="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="100dp"
+                    android:layout_weight="1"
+                    android:nextFocusDown="@+id/selectcompany"
+                    android:paddingLeft="6sp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -165,7 +349,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Company"
+                android:text="Select From"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -177,176 +361,70 @@
                 android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/company"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_weight="1"
-                    android:nextFocusDown="@+id/model"
-                    android:paddingLeft="6sp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
                 <Button
-                    android:id="@+id/select_company"
-                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/selectcompany"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginRight="10sp"
                     android:background="@drawable/select_button"
                     android:padding="4sp"
                     android:singleLine="true"
                     android:text="Company"
                     android:textSize="12sp" />
 
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Select Model"
-                android:textColor="@color/colorPrimary"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/model"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_weight="1"
-                    android:nextFocusDown="@+id/quantity"
-                    android:paddingLeft="6sp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
                 <Button
-                    android:id="@+id/select_model"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/selectcategory"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="1"
                     android:background="@drawable/select_button"
                     android:padding="4sp"
                     android:singleLine="true"
-                    android:text="Model"
+                    android:text="Category"
                     android:textSize="12sp" />
 
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/list_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Select Quantity"
-                android:textColor="@color/colorPrimary"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="10sp"
+            android:layout_marginRight="10sp"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/quantity"
-                    android:layout_width="0dp"
+                <ListView
+                    android:id="@+id/company_list"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:inputType="number"
-                    android:nextFocusDown="@+id/rate"
-                    android:paddingLeft="6sp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:scrollbars="none"
+                    android:visibility="gone" />
 
-                <Button
-                    android:id="@+id/select_quantity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:background="@drawable/select_button"
-                    android:padding="4sp"
-                    android:singleLine="true"
-                    android:text="QTY."
-                    android:textSize="12sp" />
+                <ListView
+                    android:id="@+id/category_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scrollbars="none"
+                    android:visibility="gone" />
 
             </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Rate"
-                android:textColor="@color/colorPrimary"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/rate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="100dp"
-                    android:layout_weight="1"
-                    android:inputType="number"
-                    android:nextFocusDown="@+id/submit_order"
-                    android:paddingLeft="6sp"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

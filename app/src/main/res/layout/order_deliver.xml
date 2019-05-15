@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20sp"
+        android:layout_marginBottom="20sp"
         android:layout_marginRight="20dp"
         android:background="@drawable/select_button"
         android:focusable="true"

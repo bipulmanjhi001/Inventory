@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20sp"
+        android:layout_marginBottom="20sp"
         android:layout_marginRight="20dp"
         android:background="@drawable/select_button"
         android:focusable="true"
@@ -100,10 +101,61 @@
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="80dp"
                     android:layout_weight="1"
+                    android:nextFocusDown="@+id/state"
+                    android:paddingLeft="6sp"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/state"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="80dp"
+                    android:layout_weight="1"
                     android:nextFocusDown="@+id/mobile"
                     android:paddingLeft="6sp"
                     android:singleLine="true"
                     android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/select_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/select_button"
+                    android:padding="4sp"
+                    android:singleLine="true"
+                    android:text="Location"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -140,7 +192,7 @@
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="80dp"
                     android:layout_weight="1"
-                    android:nextFocusDown="@+id/shop_name"
+                    android:nextFocusDown="@+id/email"
                     android:paddingLeft="6sp"
                     android:singleLine="true"
                     android:textColor="@color/black"
@@ -162,7 +214,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Shop Name"
+                android:text="Email"
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -175,13 +227,13 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/shop_name"
+                    android:id="@+id/email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="80dp"
                     android:layout_weight="1"
-                    android:nextFocusDown="@+id/location"
+                    android:nextFocusDown="@+id/gst"
                     android:paddingLeft="6sp"
                     android:singleLine="true"
                     android:textColor="@color/black"
@@ -202,7 +254,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Location"
+                android:text="GST No."
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -215,7 +267,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/location"
+                    android:id="@+id/gst"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
@@ -236,6 +288,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:focusable="true"
+            android:visibility="gone"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
@@ -305,7 +358,7 @@
                     android:layout_marginRight="80dp"
                     android:layout_weight="1"
                     android:inputType="number"
-                    android:nextFocusDown="@+id/submit_boring_report"
+                    android:nextFocusDown="@+id/submit_register"
                     android:paddingLeft="6sp"
                     android:singleLine="true"
                     android:textColor="@color/black"
@@ -322,7 +375,7 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/submit_boring_report"
+                android:id="@+id/submit_register"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="center"

@@ -1,4 +1,4 @@
-package com.inventory.pref;
+package com.broadwaybazar.pref;
 
 public class User {
     private String id, mobile;

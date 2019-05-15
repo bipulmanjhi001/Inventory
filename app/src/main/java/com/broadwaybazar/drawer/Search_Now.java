@@ -1,4 +1,4 @@
-package com.inventory.drawer;
+package com.broadwaybazar.drawer;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,22 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inventory.R;
+import com.broadwaybazar.R;
 
-public class Register extends Fragment {
+public class Search_Now extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
-    private Order.OnFragmentInteractionListener mListener;
 
-    public Register() {
+    private OnFragmentInteractionListener mListener;
+
+    public Search_Now() {
     }
 
-    public static Register newInstance(String param1, String param2) {
-        Register fragment = new Register();
+    public static Search_Now newInstance(String param1, String param2) {
+        Search_Now fragment = new Search_Now();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -43,7 +44,7 @@ public class Register extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.register_form, container, false);
+        View view = inflater.inflate(R.layout.search_now_form, container, false);
 
         return view;
     }

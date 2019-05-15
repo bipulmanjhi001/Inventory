@@ -1,8 +1,8 @@
-package com.inventory.main;
+package com.broadwaybazar.main;
 
-import android.animation.ObjectAnimator;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,37 +12,42 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.inventory.R;
-import com.inventory.drawer.Follow_Up;
-import com.inventory.drawer.Order;
-import com.inventory.drawer.Order_Deliver;
-import com.inventory.drawer.Payment_Receive;
-import com.inventory.drawer.Register;
-import com.inventory.drawer.Search_Now;
+import com.broadwaybazar.R;
+import com.broadwaybazar.drawer.Follow_Up;
+import com.broadwaybazar.drawer.Order;
+import com.broadwaybazar.drawer.Order_Deliver;
+import com.broadwaybazar.drawer.Payment_Receive;
+import com.broadwaybazar.drawer.Register;
+import com.broadwaybazar.drawer.Search_Now;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Class fragmentClass;
     DrawerLayout drawer;
-    FloatingActionButton fab;
     Fragment fragment = null;
+    private static final String SHARED_PREF_NAME = "Inventorypref";
+    String name, email, token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            name = bundle.getString("name");
+            token = bundle.getString("token");
+            email = bundle.getString("email");
+        } else {
+            SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+            name = sp.getString("keyusername", "");
+            token = sp.getString("keyid", "");
+            email = sp.getString("email", "");
+        }
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ObjectAnimator.ofFloat(fab, "rotation", 0f, 360f).setDuration(800).start();
-            }
-        });
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -98,6 +103,13 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             fragmentClass = Payment_Receive.class;
 
         }
+        /*else if (id == R.id.nav_logout) {
+            Intent intent=new Intent(Dashboard.this,Login.class);
+            startActivity(intent);
+            finish();
+            SharedPrefManager.getInstance(getApplicationContext()).logout();
+        }*/
+
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {

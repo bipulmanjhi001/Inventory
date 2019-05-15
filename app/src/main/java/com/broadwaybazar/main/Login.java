@@ -1,4 +1,4 @@
-package com.inventory.main;
+package com.broadwaybazar.main;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -21,12 +21,12 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.inventory.R;
-import com.inventory.api.URL;
-import com.inventory.model.ConnectivityReceiver;
-import com.inventory.model.VolleySingleton;
-import com.inventory.pref.SharedPrefManager;
-import com.inventory.pref.User;
+import com.broadwaybazar.R;
+import com.broadwaybazar.api.URL;
+import com.broadwaybazar.model.ConnectivityReceiver;
+import com.broadwaybazar.model.VolleySingleton;
+import com.broadwaybazar.pref.SharedPrefManager;
+import com.broadwaybazar.pref.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
+
     private static final String SHARED_PREF_NAME = "Inventorypref";
     private static final String KEY_ID = "keyid";
     String username, password;
@@ -49,14 +50,12 @@ public class Login extends AppCompatActivity {
 
         UserView = findViewById(R.id.user_id);
         mPasswordView = findViewById(R.id.password);
-
         SharedPreferences prefs = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         tokens = prefs.getString(KEY_ID, null);
 
-
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
             finish();
-            startActivity(new Intent(this, Login.class));
+            startActivity(new Intent(this, Dashboard.class));
         }
 
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -100,44 +99,29 @@ public class Login extends AppCompatActivity {
     private void attemptLogin() {
         UserView.setError(null);
         mPasswordView.setError(null);
-
         username = UserView.getText().toString();
         password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-
         if (TextUtils.isEmpty(username)) {
             UserView.setError(getString(R.string.error_field_required));
             focusView = UserView;
             cancel = true;
         }
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError(getString(R.string.error_incorrect_password));
             focusView = mPasswordView;
             cancel = true;
         }
         if (cancel) {
             focusView.requestFocus();
+
         } else {
 
-            if (UserView.getText().toString().equals("admin") && mPasswordView.getText().toString().equals("12345")) {
-
-                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                                        /*intent.putExtra("name", name);
-                                        intent.putExtra("token", token);
-                                        intent.putExtra("email", email);*/
-                startActivity(intent);
-                finish();
-            }
-            //Authenticate();
+            Authenticate();
         }
-    }
-
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
     }
 
     public void Authenticate() {
@@ -152,12 +136,13 @@ public class Login extends AppCompatActivity {
                                 JSONObject userJson = obj.getJSONObject("user");
                                 String token = userJson.getString("token");
                                 String name = userJson.getString("name");
-                                String mobile = userJson.getString("mobile");
+                                String mobile = userJson.getString("mobno");
                                 String email = userJson.getString("email");
+                                String doj = userJson.getString("doj");
 
                                 User user = new User(
                                         userJson.getString("token"),
-                                        userJson.getString("mobile"),
+                                        userJson.getString("mobno"),
                                         userJson.getString("name"),
                                         userJson.getString("email")
                                 );
@@ -165,9 +150,9 @@ public class Login extends AppCompatActivity {
                                 finish();
 
                                 Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                                        /*intent.putExtra("name", name);
+                                intent.putExtra("name", name);
                                         intent.putExtra("token", token);
-                                        intent.putExtra("email", email);*/
+                                intent.putExtra("email", email);
                                 startActivity(intent);
                                 finish();
 
@@ -193,7 +178,7 @@ public class Login extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("username", username);
+                params.put("login_id", username);
                 params.put("password", password);
                 return params;
             }

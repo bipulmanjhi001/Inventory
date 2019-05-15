@@ -1,4 +1,4 @@
-package com.inventory.drawer;
+package com.broadwaybazar.drawer;
 
 
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.inventory.R;
+import com.broadwaybazar.R;
 
 public class Order_Deliver extends Fragment {
 
