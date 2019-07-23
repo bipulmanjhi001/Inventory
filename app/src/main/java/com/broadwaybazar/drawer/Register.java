@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -25,15 +24,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.broadwaybazar.R;
 import com.broadwaybazar.api.URL;
 import com.broadwaybazar.model.VolleySingleton;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import static android.content.Context.MODE_PRIVATE;
 
 public class Register extends Fragment {
@@ -41,15 +37,19 @@ public class Register extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String SHARED_PREF_NAME = "Inventorypref";
+
     ListView Item;
     String token, getId;
-    EditText state, name, address, mobile, email, gst, remarks;
-    String states, names, addresss, mobiles, emails, gsts, remarkss;
+    EditText state, name, mobile, email, gst, Address,Customer_Name;
+    String states, names,  mobiles, emails, gsts, Addresss,Customer_Names;
     Button select_area, submit_register;
+
     ArrayList item_ids = new ArrayList();
     ArrayList item_names = new ArrayList();
+
     private String mParam1;
     private String mParam2;
+
     private OnFragmentInteractionListener mListener;
 
     public Register() {
@@ -77,18 +77,17 @@ public class Register extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register_form, container, false);
-
         SharedPreferences sp = getActivity().getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         token = sp.getString("keyid", "");
 
         AreaList();
         state = view.findViewById(R.id.state);
-        name = view.findViewById(R.id.name);
-        address = view.findViewById(R.id.address);
+        name = view.findViewById(R.id.Shop_Name);
+        Customer_Name = view.findViewById(R.id.Customer_Name);
         mobile = view.findViewById(R.id.mobile);
         email = view.findViewById(R.id.email);
         gst = view.findViewById(R.id.gst);
-        remarks = view.findViewById(R.id.remarks);
+        Address = view.findViewById(R.id.Address);
 
         select_area = view.findViewById(R.id.select_area);
         select_area.setOnClickListener(new View.OnClickListener() {
@@ -97,25 +96,26 @@ public class Register extends Fragment {
                 showPopupArea(v);
             }
         });
-        submit_register = view.findViewById(R.id.submit_register);
+
+        submit_register =(Button) view.findViewById(R.id.submit_register);
         submit_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 attemptRegister();
             }
         });
+
         return view;
     }
 
     private void attemptRegister() {
-
         states = state.getText().toString();
         names = name.getText().toString();
-        addresss = address.getText().toString();
+        Customer_Names = Customer_Name.getText().toString();
         mobiles = mobile.getText().toString();
         emails = email.getText().toString();
         gsts = gst.getText().toString();
-        remarkss = remarks.getText().toString();
+        Addresss = Address.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -125,9 +125,14 @@ public class Register extends Fragment {
             focusView = name;
             cancel = true;
         }
-        if (TextUtils.isEmpty(addresss)) {
-            address.setError(getString(R.string.error_field_required));
-            focusView = address;
+        if (TextUtils.isEmpty(Customer_Names)) {
+            Customer_Name.setError(getString(R.string.error_field_required));
+            focusView = Customer_Name;
+            cancel = true;
+        }
+        if (TextUtils.isEmpty(Addresss)) {
+            Address.setError(getString(R.string.error_field_required));
+            focusView = Address;
             cancel = true;
         }
         if (TextUtils.isEmpty(states)) {
@@ -185,7 +190,7 @@ public class Register extends Fragment {
                             JSONObject obj = new JSONObject(response);
                             if (obj.getBoolean("status")) {
 
-                                JSONArray userJson = obj.getJSONArray("area");
+                                JSONArray userJson = obj.getJSONArray("state");
                                 for (int i = 0; i < userJson.length(); i++) {
 
                                     JSONObject itemslist = userJson.getJSONObject(i);
@@ -196,7 +201,7 @@ public class Register extends Fragment {
 
                                 }
                             } else {
-                                Toast.makeText(getActivity(), "No supplier added", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "No state selected", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -209,12 +214,6 @@ public class Register extends Fragment {
 
                     }
                 }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("token", token);
-                return params;
-            }
         };
         VolleySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
     }
@@ -249,11 +248,11 @@ public class Register extends Fragment {
 
                                 state.setText("");
                                 name.setText("");
-                                address.setText("");
+                                Customer_Name.setText("");
                                 mobile.setText("");
                                 email.setText("");
                                 gst.setText("");
-                                remarks.setText("");
+                                Address.setText("");
 
                                 Toast.makeText(getActivity(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                             } else {
@@ -274,12 +273,13 @@ public class Register extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("token", token);
-                params.put("name", names);
+                params.put("sname", names);
+                params.put("name", Customer_Names);
                 params.put("mobile", mobiles);
                 params.put("email", emails);
                 params.put("gstin", gsts);
-                params.put("state", getId);
-                params.put("address", addresss);
+                params.put("state", state.getText().toString());
+                params.put("address", Addresss);
                 return params;
             }
         };

@@ -13,6 +13,6 @@
         android:layout_gravity="center"
         android:layout_margin="6sp"
         android:gravity="center"
-        android:text="Choose Company"
+        android:text="Choose Products ( Max Discount upto 20 % )"
         android:textColor="@color/app_white" />
 </LinearLayout>

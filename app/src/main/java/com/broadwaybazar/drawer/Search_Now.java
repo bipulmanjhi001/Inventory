@@ -14,10 +14,8 @@ public class Search_Now extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
     private String mParam1;
     private String mParam2;
-
     private OnFragmentInteractionListener mListener;
 
     public Search_Now() {
@@ -42,8 +40,7 @@ public class Search_Now extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_now_form, container, false);
 
         return view;

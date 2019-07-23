@@ -12,10 +12,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -27,21 +29,26 @@ import com.broadwaybazar.model.ConnectivityReceiver;
 import com.broadwaybazar.model.VolleySingleton;
 import com.broadwaybazar.pref.SharedPrefManager;
 import com.broadwaybazar.pref.User;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class Login extends AppCompatActivity {
-
     private static final String SHARED_PREF_NAME = "Inventorypref";
     private static final String KEY_ID = "keyid";
     String username, password;
-    String tokens;
+
+    String tokens,useridss="blank",passwordss="";
     private EditText UserView;
+    ProgressBar login_progress;
     private EditText mPasswordView;
+    CheckBox remember;
+
+    public static final String REMEMBER_DATA = "remember_data" ;
+    public static final String userid = "userid";
+    public static final String passwords = "passwords";
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +57,13 @@ public class Login extends AppCompatActivity {
 
         UserView = findViewById(R.id.user_id);
         mPasswordView = findViewById(R.id.password);
+
         SharedPreferences prefs = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         tokens = prefs.getString(KEY_ID, null);
 
-        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
-            finish();
-            startActivity(new Intent(this, Dashboard.class));
-        }
+        SharedPreferences prefs2 = getSharedPreferences(REMEMBER_DATA, MODE_PRIVATE);
+        useridss = prefs2.getString(userid, null);
+        passwordss = prefs2.getString(passwords, null);
 
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -68,11 +75,37 @@ public class Login extends AppCompatActivity {
                 return false;
             }
         });
+
+        login_progress=(ProgressBar)findViewById(R.id.login_progress);
         Button SignInButton = findViewById(R.id.sign_in_button);
         SignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkConnection();
+            }
+        });
+
+        remember=(CheckBox)findViewById(R.id.remember);
+        remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                try {
+                        if (useridss != null && useridss.equalsIgnoreCase("blank")) {
+                            sharedpreferences =  getSharedPreferences(REMEMBER_DATA, MODE_PRIVATE);
+                            useridss=UserView.getText().toString();
+                            passwordss=mPasswordView.getText().toString();
+                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                            editor.putString(userid, useridss);
+                            editor.putString(passwords, passwordss);
+                            editor.apply();
+
+                    }else {
+                            UserView.setText(useridss);
+                            mPasswordView.setText(passwordss);
+                    }
+                }catch (NullPointerException e){
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -119,12 +152,12 @@ public class Login extends AppCompatActivity {
             focusView.requestFocus();
 
         } else {
-
             Authenticate();
         }
     }
 
     public void Authenticate() {
+        login_progress.setVisibility(View.VISIBLE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL.URL_LOGIN,
                 new Response.Listener<String>() {
                     @Override
@@ -135,24 +168,24 @@ public class Login extends AppCompatActivity {
 
                                 JSONObject userJson = obj.getJSONObject("user");
                                 String token = userJson.getString("token");
-                                String name = userJson.getString("name");
-                                String mobile = userJson.getString("mobno");
-                                String email = userJson.getString("email");
-                                String doj = userJson.getString("doj");
+                                String username = userJson.getString("username");
+                                String role = userJson.getString("role");
+                                String sales_id = userJson.getString("sales_id");
 
                                 User user = new User(
                                         userJson.getString("token"),
-                                        userJson.getString("mobno"),
-                                        userJson.getString("name"),
-                                        userJson.getString("email")
-                                );
+                                        userJson.getString("username"),
+                                        userJson.getString("role"),
+                                        userJson.getString("sales_id"));
+
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                                 finish();
 
                                 Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                                intent.putExtra("name", name);
-                                        intent.putExtra("token", token);
-                                intent.putExtra("email", email);
+                                intent.putExtra("name", username);
+                                intent.putExtra("token", token);
+                                intent.putExtra("role", role);
+                                intent.putExtra("sales_id",sales_id);
                                 startActivity(intent);
                                 finish();
 
@@ -178,7 +211,7 @@ public class Login extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("login_id", username);
+                params.put("username", username);
                 params.put("password", password);
                 return params;
             }
@@ -197,8 +230,7 @@ public class Login extends AppCompatActivity {
         alertDialog.setTitle("Leave application?");
         alertDialog.setMessage("Are you sure you want to leave the application?");
         alertDialog.setIcon(R.mipmap.ic_launcher);
-        alertDialog.setPositiveButton("YES",
-                new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
                     }

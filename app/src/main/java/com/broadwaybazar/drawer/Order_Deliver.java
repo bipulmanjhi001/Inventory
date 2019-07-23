@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.broadwaybazar.R;
 
 public class Order_Deliver extends Fragment {
@@ -21,6 +20,7 @@ public class Order_Deliver extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public Order_Deliver() {
+
     }
 
     public static Order_Deliver newInstance(String param1, String param2) {
@@ -42,8 +42,7 @@ public class Order_Deliver extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.order_deliver, container, false);
 
 

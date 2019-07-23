@@ -3,15 +3,14 @@ package com.broadwaybazar.pref;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-
 import com.broadwaybazar.main.Login;
 
 public class SharedPrefManager {
 
     private static final String SHARED_PREF_NAME = "Inventorypref";
     private static final String KEY_USERNAME = "keyusername";
-    private static final String KEY_EMAIL = "email";
-    private static final String KEY_MOBILE = "mobile";
+    private static final String KEY_ROLE = "role";
+    private static final String KEY_SALES_ID = "sales_id";
     private static final String KEY_ID = "keyid";
     private static SharedPrefManager mInstance;
     private static Context mCtx;
@@ -30,9 +29,10 @@ public class SharedPrefManager {
     public void userLogin(User user) {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_ID, user.getId());
+        editor.putString(KEY_ID, user.getToken());
         editor.putString(KEY_USERNAME, user.getUsername());
-        editor.putString(KEY_EMAIL, user.getEmail());
+        editor.putString(KEY_ROLE, user.getRole());
+        editor.putString(KEY_SALES_ID, user.getSales_id());
         editor.apply();
     }
 
@@ -51,9 +51,9 @@ public class SharedPrefManager {
     public User getUser() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new User(sharedPreferences.getString(KEY_ID, null),
-                sharedPreferences.getString(KEY_MOBILE, null),
+                sharedPreferences.getString(KEY_ID, null),
                 sharedPreferences.getString(KEY_USERNAME, null),
-                sharedPreferences.getString(KEY_EMAIL, null));
+                sharedPreferences.getString(KEY_ROLE, null));
     }
 
     public void logout() {

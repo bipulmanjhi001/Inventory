@@ -1,30 +1,21 @@
 package com.broadwaybazar.pref;
 
 public class User {
-    private String id, mobile;
-    private String username, password, email;
+    private String token,username,role, sales_id;
 
-    public User(String id, String mobile, String username, String email) {
-        this.id = id;
-        this.mobile = mobile;
+    public User(String token, String username, String role, String sales_id) {
+        this.token = token;
         this.username = username;
-        this.email = email;
+        this.role = role;
+        this.sales_id = sales_id;
     }
 
-    public String getId() {
-        return id;
+    public String getToken() {
+        return token;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getUsername() {
@@ -35,19 +26,19 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getRole() {
+        return role;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public String getEmail() {
-        return email;
+    public String getSales_id() {
+        return sales_id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSales_id(String sales_id) {
+        this.sales_id = sales_id;
     }
 }

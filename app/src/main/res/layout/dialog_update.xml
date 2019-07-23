@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="10sp"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_v"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/update_text"
+        android:textSize="15sp"
+        android:textColor="@color/colorPrimary"
+        android:textAlignment="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10sp"
+        android:layout_marginRight="20sp"
+        android:id="@+id/textMessage"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content">
+
+      <Button
+        android:id="@+id/buttoncancel"
+        android:layout_width="match_parent"
+        android:layout_height="38sp"
+        android:layout_weight="1"
+        android:text="@string/cancel"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/select_button"
+        android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/buttonUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="38sp"
+            android:layout_weight="1"
+            android:text="@string/update"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/select_button"
+            android:textAlignment="center" />
+    </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -2,6 +2,8 @@ package com.broadwaybazar.main;
 
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,14 +14,27 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.broadwaybazar.R;
+import com.broadwaybazar.api.URL;
 import com.broadwaybazar.drawer.Follow_Up;
 import com.broadwaybazar.drawer.Order;
 import com.broadwaybazar.drawer.Order_Deliver;
 import com.broadwaybazar.drawer.Payment_Receive;
 import com.broadwaybazar.drawer.Register;
 import com.broadwaybazar.drawer.Search_Now;
+import com.broadwaybazar.model.UpdateMeeDialog;
+import com.broadwaybazar.model.VolleySingleton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -27,8 +42,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     DrawerLayout drawer;
     Fragment fragment = null;
     private static final String SHARED_PREF_NAME = "Inventorypref";
-    String name, email, token;
-
+    String name, email, token,versionName;
+    public static String PACKAGE_NAME;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,15 +66,26 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        final PackageManager packageManager = getApplicationContext().getPackageManager();
+        if (packageManager != null) {
+            try {
+                PackageInfo packageInfo = packageManager.getPackageInfo(getApplicationContext().getPackageName(), 0);
+                PACKAGE_NAME = getApplicationContext().getPackageName();
+                versionName = packageInfo.versionName;
+            } catch (PackageManager.NameNotFoundException e) {
+                versionName = null;
+            }
+        }
+
+        UPDATE();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.dashboard, new Register()).commit();
-        setTitle("New Register");
+        setTitle("Add Customer");
 
     }
 
@@ -103,12 +129,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             fragmentClass = Payment_Receive.class;
 
         }
-        /*else if (id == R.id.nav_logout) {
-            Intent intent=new Intent(Dashboard.this,Login.class);
-            startActivity(intent);
-            finish();
-            SharedPrefManager.getInstance(getApplicationContext()).logout();
-        }*/
 
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -123,5 +143,46 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    private void UPDATE() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL.URL_GETVERSION,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+
+                            JSONObject obj = new JSONObject(response);
+                            if (obj.getBoolean("status")) {
+
+                                JSONObject getversion = obj.getJSONObject("version");
+                                String version_code = getversion.getString("version_code");
+                                String version_name = getversion.getString("version_name");
+
+                                if (version_name.equals(versionName)) {
+
+                                    Toast.makeText(getApplicationContext(), "Welcome", Toast.LENGTH_SHORT).show();
+
+                                } else {
+
+                                    UpdateMeeDialog updateMeeDialog = new UpdateMeeDialog();
+                                    updateMeeDialog.showDialogAddRoute(Dashboard.this, PACKAGE_NAME);
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Check connection again.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+        {
+        };
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 }

@@ -8,6 +8,7 @@
         android:id="@+id/List"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:listSelector="@drawable/list_selector"></ListView>
+        android:textColor="#FFFFFF"
+        android:listSelector="@drawable/list_selector"/>
 
 </LinearLayout>
